@@ -1,8 +1,12 @@
 from datetime import datetime
-from typing import Optional, List
+from typing import TYPE_CHECKING, Optional
 from enum import Enum
 import uuid
 from sqlmodel import SQLModel, Field, Relationship
+
+if TYPE_CHECKING:
+    from .user import User
+
 
 class DonationType(str, Enum):
     shoes = "shoes"
@@ -18,19 +22,6 @@ class DonationStatus(str, Enum):
     processed = "processed"
 
 
-class User(SQLModel, table=True):
-    __tablename__ = "users"
-    
-    # default factory so that a unique id is generated everytime a new object is created
-    id: uuid.UUID = Field(default_factory=uuid.uuid4, primary_key=True)
-    username: str = Field(index=True, unique=True)
-    email: str = Field(index=True, unique=True)
-    hashed_password: str
-    is_admin: bool = Field(default=False)    
-    donations: List["Donation"] = Relationship(
-        back_populates="user",
-    )
-
 class Donation(SQLModel, table=True):
     __tablename__ = "donations"
 
@@ -43,4 +34,4 @@ class Donation(SQLModel, table=True):
     donation_type: DonationType = Field(nullable=False)
     status: DonationStatus = DonationStatus.submitted 
 
-    user: Optional[User] = Relationship(back_populates="donations")
+    user: Optional["User"] = Relationship(back_populates="donations")

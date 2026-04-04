@@ -1,23 +1,11 @@
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import Optional
-from enum import Enum
 from datetime import datetime
 import uuid
+from models import DonationType, DonationStatus
 
 
-class DonationType(str, Enum):
-    shoes = "shoes"
-    clothes = "clothes"
-    electronics = "electronics"
-    furniture = "furniture"
-    other = "other"
 
-
-class DonationStatus(str, Enum):
-    submitted = "submitted"
-    processing = "processing"
-    processed = "processed"
-    
 class DonationBase(BaseModel):
     mobile_number: str = Field(min_length=9, max_length=9)
     neighbourhood: str

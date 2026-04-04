@@ -2,14 +2,14 @@ from datetime import UTC, datetime, timedelta
 import jwt
 from fastapi.security import OAuth2PasswordBearer
 from pwdlib import PasswordHash
-from config import settings
+from .config import settings
 
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select
 import models
-from database import get_db
+from .database import get_db
 import uuid
 
 password_hash = PasswordHash.recommended()
@@ -97,4 +97,3 @@ def admin_required(current_user=Depends(get_current_user)):
             detail="Admin access required",
         )
     return current_user
-    

@@ -15,4 +15,4 @@ class Settings(BaseSettings):
     access_token_expire_minutes: int = 30 
     
 # this method is better than os.getenv ( type hinting in pydantic-settings, riase error if missing keys , SecretStr and automatic defaults)    
-settings = Settings()    
+settings = Settings()

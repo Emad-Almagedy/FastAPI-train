@@ -8,15 +8,15 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select, func
 
 import models
-from auth import (
+from core import (
     create_access_token,
     hash_password,
     oauth2_scheme,
     verify_access_token,
     verify_password,
+    settings,
+    get_db,
 )
-from config import settings
-from database import get_db
 from schemas import Token, UserCreate, UserPrivate, UserPublic, UserUpdate
 
 # intialize the router app

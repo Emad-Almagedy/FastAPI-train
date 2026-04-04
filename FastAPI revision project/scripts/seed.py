@@ -1,7 +1,6 @@
 import asyncio
-from database import AsyncSessionLocal
+from core import AsyncSessionLocal, hash_password
 import models
-from auth import hash_password
 
 
 async def create_admin():

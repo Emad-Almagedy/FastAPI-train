@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlmodel import select, desc
 
 import models
-from database import get_db
+from core import get_db, get_current_user, admin_required
 from schemas import (
     DonationCreate,
     DonationRead,
@@ -15,7 +15,6 @@ from schemas import (
     DonationUpdate,
     DonationStatus,
 )
-from auth import get_current_user, admin_required  # assuming you already have these
 
 router = APIRouter()
 
