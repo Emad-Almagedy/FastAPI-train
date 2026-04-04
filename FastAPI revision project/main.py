@@ -1,4 +1,16 @@
-import uvicorn
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+from database import engine, create_db_and_tables
+import models # so that sqlmodels registers tables
+from routers import users, donations
 
-if __name__ == "__main__":
-    uvicorn.run("src.app:app", port = 8000, host = "0.0.0.0", reload = True)
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await create_db_and_tables()
+    yield
+    
+app = FastAPI(lifespan=lifespan) 
+
+app.include_router(users.router, prefix="/users", tags=["Users"])
+app.include_router(donations.router, prefix="/donations", tags=["Donations"])
+   
