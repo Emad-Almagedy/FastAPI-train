@@ -7,12 +7,18 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from alembic import context
 
+
 # ================================ADDED BY ME================================== 
 import models
 from core import settings
 from sqlmodel import SQLModel
 import sys
 import asyncio
+
+import os
+from dotenv import load_dotenv
+
+
 # ================================ADDED BY ME================================== 
 if sys.platform == "win32":
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
@@ -21,7 +27,9 @@ if sys.platform == "win32":
 # access to the values within the .ini file in use.
 config = context.config
 # ================================ADDED BY ME================================== 
-config.set_main_option("sqlalchemy.url", settings.database_url)
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
+config.set_main_option("sqlalchemy.url", DATABASE_URL)
 
 
 # Interpret the config file for Python logging.

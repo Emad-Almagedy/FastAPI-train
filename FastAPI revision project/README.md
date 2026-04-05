@@ -27,7 +27,7 @@ or
 
 9. files to be updated (add the  database_url to config settings and .env, update the lifespan function in the main.py)
 
-10. run `uv run alembic init -t async alembic` then we will need to update the alembic.ini and env.py in the alembic folder.
+10. run `uv run alembic init -t async alembic` then we will need to update the alembic.ini and env.py in the alembic folder and remove the databaseURL and link the one in the .env in the database folder.
 
 11. we will generate our first migration using alembic `uv run alembic revision --autogenerate -m "initial schema"` this will create a file. and then apply the migration ` uv run alembic upgrade head`( heck by using psql blog -U bloguser and then \dt and \d TABLENAME for specific tables)
 
@@ -38,4 +38,5 @@ or
 # note: 
 1. add compare type setting as true in alembic env.py (to detect column type type changes in the alembic)
 2. we will run the alembic upgrade head once in production of all the commits.
+
 

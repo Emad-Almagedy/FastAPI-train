@@ -1,13 +1,15 @@
 from sqlmodel import SQLModel
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
 
-DATABASE_URL = "sqlite+aiosqlite:///./donation.db"
+load_dotenv()
 
+DATABASE_URL = os.getenv("DATABASE_URL")
 # create async engine
 engine = create_async_engine(
     DATABASE_URL,
-    connect_args={"check_same_thread": False},
 )
 
 # async session maker
