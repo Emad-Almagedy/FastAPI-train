@@ -8,6 +8,9 @@ class Settings(BaseSettings):
         env_file_encoding= "utf-8"
     )
     
+    # database URL for alembic
+    database_url: str 
+    
     # prevents the key from being accidently printed in logs or tracebacks
     secret_key : SecretStr
     # if not found in .env then default

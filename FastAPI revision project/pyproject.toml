@@ -13,4 +13,5 @@ dependencies = [
     "streamlit>=1.55.0",
     "uvicorn[standared]>=0.42.0",
     "sqlmodel>=0.0.38",
+    "psycopg>=3.3.3",
 ]
